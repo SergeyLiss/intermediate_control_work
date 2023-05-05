@@ -8,7 +8,7 @@ class ActNotes():
         pass
 
     # Add Note in Table
-    def addNote(self, title, msg, id = None):
+    def addNote(self, title, msg, id=None):
         if id == None:
             self.table += [datetime.now(), title, msg]
         else:

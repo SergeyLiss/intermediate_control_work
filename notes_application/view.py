@@ -5,6 +5,15 @@ class InterfaceConsoleNotes():
     def __init__(self) -> None:
         pass
 
+    #
+    def commandView(self):
+        flag = False
+        msg = ''
+        while flag != True:
+            msg = input("Введите команду: ")
+            flag = self.controlInput(msg)
+        return msg
+
     # Открытие файла
     def openFileView(self):
         flag = False
@@ -16,12 +25,18 @@ class InterfaceConsoleNotes():
     
     # Результаты работы методов: открыть файл, сохранить заметку, удалить заметку
     def resultAllView(self, cod, id=None):
-        if cod == 0:
-            print(f"Файл {id}.json открыт.")
+        if cod == 1:
+            print(f"Файл {id} открыт.")
+        elif cod == 11:
+            print(f"Файл {id} создан.")
         elif cod == 2:
             print(f"Заметка id={id} сохранена.")
-        elif cod == 4:
+        elif cod == 3:
             print(f"Заметка id={id} удалена.")
+        elif cod == 4:
+            print("Неправильная команда. Чтобы узнать список команд, введите команду 'h' или 'help' ...")
+        elif cod == 41:
+            print("Какая-то ошибка в commandSelection()")
         else:
             print(f"Проблемка: {cod}...{id}")
     
@@ -45,3 +60,7 @@ class InterfaceConsoleNotes():
         else:
             print("Вы ничего не ввели. Попробуйте снова...")
             return False
+    
+    #
+    def commandHelpView(self):
+        print()
