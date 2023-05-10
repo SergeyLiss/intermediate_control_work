@@ -84,3 +84,4 @@ class InterfaceConsoleNotes():
     #
     def commandHelpView(self):
         print()
+        

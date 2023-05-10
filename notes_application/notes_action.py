@@ -30,3 +30,4 @@ class ActNotes():
     def changeNote(self, newMsg):
         self.table[self.id] = newMsg
         pass
+

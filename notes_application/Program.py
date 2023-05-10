@@ -120,12 +120,6 @@ class Models(InterfaceConsoleNotes, ActNotes, ActFileJson):
     def readListFromTable(self):
         self.readAllNoteView(self.table)
         pass
-
-
-
-
-            
-
     
 
 

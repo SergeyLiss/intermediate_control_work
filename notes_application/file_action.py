@@ -24,3 +24,4 @@ class ActFileJson():
         with open(self.nameFile, "w") as potokFile:
             potokFile.write(json.dumps(self.dataFile))
         pass
+    
