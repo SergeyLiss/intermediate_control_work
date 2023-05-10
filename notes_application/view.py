@@ -10,7 +10,7 @@ class InterfaceConsoleNotes():
         flag = False
         msg = ''
         while flag != True:
-            msg = input("Введите команду: ")
+            msg = input("\nВведите команду: ")
             flag = self.controlInput(msg)
         return msg
 
@@ -37,6 +37,10 @@ class InterfaceConsoleNotes():
             print("Неправильная команда. Чтобы узнать список команд, введите команду 'h' или 'help' ...")
         elif cod == 41:
             print("Какая-то ошибка в commandSelection()")
+        elif cod == 5:
+            print(f"Заметка id={id} создана.")
+        elif cod == 6:
+            print(f"Заметка id={id} изменена.")
         else:
             print(f"Проблемка: {cod}...{id}")
     
@@ -48,9 +52,25 @@ class InterfaceConsoleNotes():
     
     # Чтение заметки
     def readNoteView(self, note):
-        listMsg = ['Заметка id=','Заголовок заметки: ','Тело заметки: ','Дата создания/изменения: ']
+        listMsg = ['Заметка id=','Дата создания/изменения: ','Заголовок заметки: ','Тело заметки: ']
         for i in range(4):
-            print(listMsg[i] + note[i])
+            print(listMsg[i] + str(note[i]))
+        pass
+    
+    # Чтение всех заметок
+    def readAllNoteView(self, notes):
+        print(notes)
+        print(' id   Дата созд./изм.       Заголовок     Тело заметки    ') # 4 20 12 16 by 2
+        print('{:>4}{:>20}{:>16}{:>20}'.format('id','Дата созд./изм.','Заголовок','Тело заметки'))
+
+        for i in range(len(notes)):
+            titleFormat = notes[i][1]
+            if len(titleFormat) > 12:
+                titleFormat = titleFormat[:9] + '...'
+            msgFormat = notes[i][2]
+            if len(msgFormat) > 16:
+                msgFormat = msgFormat[:9] + '...'
+            print('{:>4}{:>20}{:>16}{:>20}'.format(i,notes[i][0],titleFormat,msgFormat))
         pass
     
     # Проверка на отсутствие пустой строки

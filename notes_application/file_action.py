@@ -10,8 +10,9 @@ class ActFileJson():
     def readFJ(self):
         try:
             with open(self.nameFile, "r") as potokFile:
-                if len(potokFile.readlines()) > 0:
-                    self.dataFile = json.loads(potokFile.readlines()[0])
+                temp = potokFile.readlines()
+                if len(temp) > 0:
+                    self.dataFile = json.loads(temp[0])
                 return 1
         except FileNotFoundError:
             newFile = open(self.nameFile, "w")
@@ -21,5 +22,5 @@ class ActFileJson():
     
     def writeFJ(self):
         with open(self.nameFile, "w") as potokFile:
-            potokFile.write(json.dumbs(self.dataFile))
+            potokFile.write(json.dumps(self.dataFile))
         pass

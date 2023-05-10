@@ -9,15 +9,6 @@ class Models(InterfaceConsoleNotes, ActNotes, ActFileJson):
         pass
 
     #
-    def openFile(self):
-        ActFileJson.__init__(self, self.openFileView())
-        temp = self.readFJ()
-        if temp == 11:
-            self.writeFJ()
-        self.resultAllView(temp, self.nameFile)
-        pass
-
-    #
     def commandCicle(self):
         comm = 0
         while comm != 8:
@@ -49,32 +40,86 @@ class Models(InterfaceConsoleNotes, ActNotes, ActFileJson):
     
     #
     def commandSelection(self, temp):
-        if temp == 0:
+        if temp == 0:                           # open
             self.openFile()
-        elif temp == 1:
+        elif temp == 1:                         # save, close
             self.saveToFile()
-        elif temp == 2:
-            pass
-        elif temp == 3:
-            pass
-        elif temp == 4:
-            pass
-        elif temp == 5:
-            pass
-        elif temp == 6:
-            pass
-        elif temp == 7:
-            pass
-        elif temp == 8:
+        elif temp == 2:                         # add
+            self.addToTable()
+        elif temp == 3:                         # read
+            self.readFromTable()
+        elif temp == 4:                         # write
+            self.writeToTable()
+        elif temp == 5:                         # delete
+            self.deleteFromTable()
+        elif temp == 6:                         # read list
+            self.readListFromTable()
+        elif temp == 7:                         # help
+            self.commandHelpView()
+        elif temp == 8:                         # exit
             exit
-        else:
+        else:                                   # Непредвиденная ошибка
             self.resultAllView(41)
+        pass
+
+    # 0. open
+    def openFile(self):
+        ActFileJson.__init__(self, self.openFileView())
+        temp = self.readFJ()
+        if temp == 11:
+            self.writeFJ()
+        self.resultAllView(temp, self.nameFile)
+        ActNotes.__init__(self, self.dataFile)
+        pass
     
-    #
-    def saveToFile(self, id='All'):
+    # 1. save, close
+    def saveToFile(self):
         self.dataFile = self.table
         self.writeFJ()
-        self.resultAllView(id)
+        self.resultAllView(2, self.id)
+        pass
+
+    # 2. add
+    def addToTable(self):
+        dataNote = ['','']
+        j = 0
+
+        for i in self.addNoteView():
+            dataNote[j] = i
+            j += 1
+        self.id = len(self.table)
+        self.addNote(dataNote[0], dataNote[1])
+        self.resultAllView(5, self.id)
+        pass
+        
+    # 3. read
+    def readFromTable(self):
+        self.readNoteView([self.id] + self.readNote())
+        pass
+
+    # 4. write
+    def writeToTable(self):
+        dataNote = ['','']
+        j = 0
+
+        for i in self.addNoteView():
+            dataNote[j] = i
+            j += 1
+        self.id = len(self.table)
+        self.addNote(dataNote[0], dataNote[1])
+        self.resultAllView(5, self.id)
+        pass
+
+    # 5. delete
+    def deleteFromTable(self):
+        self.delNote()
+        self.resultAllView(3, self.id)
+
+    # 6. read list
+    def readListFromTable(self):
+        self.readAllNoteView(self.table)
+        pass
+
 
 
 
