@@ -1,3 +1,4 @@
+# Работа с файлом
 import json
 
 class ActFileJson():
@@ -18,7 +19,6 @@ class ActFileJson():
             newFile = open(self.nameFile, "w")
             newFile.close()
             return 11
-            
     
     def writeFJ(self):
         with open(self.nameFile, "w") as potokFile:

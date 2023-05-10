@@ -1,3 +1,4 @@
+# Координация между элементами программы
 from view import InterfaceConsoleNotes
 from file_action import ActFileJson
 from notes_action import ActNotes

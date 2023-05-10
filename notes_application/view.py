@@ -1,4 +1,4 @@
-#
+# Ввод/вывод в консоль
 
 class InterfaceConsoleNotes():
 

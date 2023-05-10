@@ -1,4 +1,4 @@
-#
+# Работа с таблицей
 from datetime import datetime
 
 class ActNotes():
