@@ -7,12 +7,14 @@ class Models(InterfaceConsoleNotes, ActNotes, ActFileJson):
 
     def __init__(self):
         super().__init__()
+        self.openFile()
         pass
 
     #
     def commandCicle(self):
         comm = 0
         while comm != 8:
+            self.id = -1
             msg = self.commandView()
             msg = '.' + msg + '.'
             comm = self.commandList(msg)
@@ -95,26 +97,33 @@ class Models(InterfaceConsoleNotes, ActNotes, ActFileJson):
         
     # 3. read
     def readFromTable(self):
-        self.readNoteView([self.id] + self.readNote())
+        self.id = self.idView(len(self.table))
+        if self.id != -1:
+            self.readNoteView([self.id] + self.readNote())
         pass
 
     # 4. write
     def writeToTable(self):
-        dataNote = ['','']
+        self.id = self.idView(len(self.table))
+        dataNote = [self.table[self.id][1], self.table[self.id][2]]
+        self.delNote()
         j = 0
 
-        for i in self.addNoteView():
+        for i in self.writeNoteView(dataNote):
             dataNote[j] = i
             j += 1
         self.id = len(self.table)
         self.addNote(dataNote[0], dataNote[1])
-        self.resultAllView(5, self.id)
+        self.resultAllView(6, self.id)
         pass
 
     # 5. delete
     def deleteFromTable(self):
-        self.delNote()
-        self.resultAllView(3, self.id)
+        self.id = self.idView(len(self.table))
+        if self.id != -1:
+            self.delNote()
+            self.resultAllView(3, self.id)
+        pass
 
     # 6. read list
     def readListFromTable(self):

@@ -6,6 +6,25 @@ class InterfaceConsoleNotes():
         pass
 
     #
+    def idView(self, size):
+        flag = False
+        msg = ''
+        while flag != True:
+            msg = input("Введите id: ") 
+            if self.controlInput(msg):
+                try:
+                    msg = int(msg)
+                    if msg < size:
+                        flag = True
+                    else:
+                        self.resultAllView(7)
+                        return -1
+                except ValueError:
+                    self.resultAllView(7)
+                    return -1
+        return msg
+
+    #
     def commandView(self):
         flag = False
         msg = ''
@@ -41,12 +60,22 @@ class InterfaceConsoleNotes():
             print(f"Заметка id={id} создана.")
         elif cod == 6:
             print(f"Заметка id={id} изменена.")
+        elif cod == 7:
+            print(f"Введите корректное id. Чтобы вывести список всех заметок введите команду 'rl' ...")
         else:
             print(f"Проблемка: {cod}...{id}")
     
     # Добавление заметки
     def addNoteView(self):
         listMsg = ['Введите заголовок заметки: ', 'Введите тело заметки: ']
+        for i in listMsg:
+            yield input(i)
+    
+    # Изменение заметки
+    def writeNoteView(self, oldNote):
+        listMsg = ['Старый заголовок заметки: ', 'Тело заметки: ']
+        for j in range(2):
+            listMsg[j] += oldNote[j] + '\n->    '
         for i in listMsg:
             yield input(i)
     
@@ -59,8 +88,6 @@ class InterfaceConsoleNotes():
     
     # Чтение всех заметок
     def readAllNoteView(self, notes):
-        print(notes)
-        print(' id   Дата созд./изм.       Заголовок     Тело заметки    ') # 4 20 12 16 by 2
         print('{:>4}{:>20}{:>16}{:>20}'.format('id','Дата созд./изм.','Заголовок','Тело заметки'))
 
         for i in range(len(notes)):
@@ -83,5 +110,15 @@ class InterfaceConsoleNotes():
     
     #
     def commandHelpView(self):
-        print()
+        helpMsg = 'Список команд:\n\
+                    o open             - открыть файл,\n\
+                    s save c close     - сохранить файл,\n\
+                    a add              - создать заметку,\n\
+                    r read             - прочитать заметку,\n\
+                    w write            - изменить заметку,\n\
+                    d del delete       - удалить заметку,\n\
+                    l list rl readlist - прочитать заметку,\n\
+                    h help             - помощь по командам,\n\
+                    e exit             - выход из программы.\n'
+        print(helpMsg)
         
