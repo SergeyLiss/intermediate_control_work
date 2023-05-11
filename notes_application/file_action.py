@@ -1,3 +1,4 @@
+# Работа с файлом
 import json
 
 class ActFileJson():
@@ -8,13 +9,19 @@ class ActFileJson():
         pass
 
     def readFJ(self):
-        potokFile = open(self.nameFile, "r")
-        self.dataFile = json.loads(potokFile.readlines()[0])
-        potokFile.close()
-        pass
+        try:
+            with open(self.nameFile, "r") as potokFile:
+                temp = potokFile.readlines()
+                if len(temp) > 0:
+                    self.dataFile = json.loads(temp[0])
+                return 1
+        except FileNotFoundError:
+            newFile = open(self.nameFile, "w")
+            newFile.close()
+            return 11
     
     def writeFJ(self):
-        potokFile = open(self.nameFile, "w")
-        potokFile.write(json.dumbs(self.dataFile))
-        potokFile.close()
+        with open(self.nameFile, "w") as potokFile:
+            potokFile.write(json.dumps(self.dataFile))
         pass
+    
